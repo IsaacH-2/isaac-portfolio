@@ -3,732 +3,542 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Isaac Hashimi | Electrical Engineering Portfolio</title>
+  <title>Isaac Hashimi - Electrical Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0f1c;
-      --bg-soft: #11192d;
-      --panel: rgba(17, 25, 45, 0.78);
-      --panel-2: rgba(24, 35, 62, 0.9);
-      --text: #edf3ff;
-      --muted: #a8b3cc;
-      --line: rgba(126, 162, 255, 0.18);
-      --accent: #5da9ff;
-      --accent-2: #7ef0ff;
-      --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
-      --radius: 22px;
-      --max: 1150px;
+      --black: #0a0a0a;
+      --white: #f8f6f1;
+      --g1: #1a1a1a;
+      --g2: #2a2a2a;
+      --g3: #444;
+      --g4: #666;
+      --g5: #888;
+      --g6: #aaa;
+      --g7: #ccc;
+      --g8: #e0ddd8;
+      --border: rgba(248,246,241,0.12);
+      --border-s: rgba(248,246,241,0.06);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--black); color: var(--white); line-height: 1.6; font-weight: 300; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    nav { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); background: rgba(10,10,10,0.92); backdrop-filter: blur(16px); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; height: 56px; }
+    .brand { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--g6); }
+    .brand strong { color: var(--white); font-weight: 500; }
+    .nav-links { display: flex; gap: 2rem; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g5); }
+    .nav-links a { transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 6rem 0; }
+
+    .section-label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g5); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* HERO */
+    #hero { padding: 8rem 0 6rem; border-bottom: 1px solid var(--border); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 4rem; align-items: end; }
+    .hero-eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g5); margin-bottom: 2rem; }
+    .hero-name { font-family: var(--serif); font-size: clamp(3.5rem, 7vw, 6rem); line-height: 1.0; margin-bottom: 0.5rem; }
+    .hero-name em { font-style: italic; color: var(--g6); }
+    .hero-bio { font-size: 1rem; color: var(--g6); max-width: 52ch; margin-top: 2rem; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+    .btn { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.75rem 1.5rem; border-radius: 2px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary { background: var(--white); color: var(--black); border: 1px solid var(--white); }
+    .btn-primary:hover { background: transparent; color: var(--white); }
+    .btn-ghost { background: transparent; color: var(--g6); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--g6); color: var(--white); }
+    .hero-img-wrap img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; filter: grayscale(100%) contrast(1.05); border: 1px solid var(--border); }
+    .hero-img-caption { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--g5); text-transform: uppercase; margin-top: 0.75rem; }
+
+    /* STATS */
+    .stats-strip { border-bottom: 1px solid var(--border); padding: 2rem 0; }
+    .stats-inner { display: flex; }
+    .stat { flex: 1; padding: 1rem 2rem; border-right: 1px solid var(--border); }
+    .stat:first-child { padding-left: 0; }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-family: var(--serif); font-size: 2.25rem; line-height: 1; margin-bottom: 0.4rem; }
+    .stat-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g5); }
+
+    /* ABOUT */
+    #about { border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .about-left h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; margin-bottom: 1.5rem; }
+    .about-left h2 em { font-style: italic; color: var(--g6); }
+    .about-left p { color: var(--g6); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1rem; }
+    .info-row { display: flex; justify-content: space-between; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--border-s); }
+    .info-row:first-child { border-top: 1px solid var(--border-s); }
+    .info-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g5); }
+    .info-val { font-size: 0.9rem; color: var(--g7); text-align: right; max-width: 60%; }
+
+    /* PROJECTS */
+    #projects { border-bottom: 1px solid var(--border); }
+    .projects-list { display: grid; gap: 1px; background: var(--border); }
+    .project-item { background: var(--black); display: grid; grid-template-columns: 1fr auto; gap: 2rem; padding: 2.5rem 0; align-items: start; transition: background 0.2s; }
+    .project-item:hover { background: var(--g1); }
+    .project-num { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; color: var(--g5); margin-bottom: 1rem; }
+    .project-name { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.1; margin-bottom: 0.75rem; }
+    .project-desc { font-size: 0.88rem; color: var(--g5); max-width: 64ch; line-height: 1.8; margin-bottom: 1.25rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.65rem; border: 1px solid var(--border); color: var(--g5); border-radius: 1px; }
+    .project-link { display: flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g5); border: 1px solid var(--border); padding: 0.5rem 0.9rem; border-radius: 1px; transition: all 0.2s; white-space: nowrap; align-self: start; margin-top: 0.2rem; }
+    .project-link:hover { color: var(--white); border-color: var(--g5); }
+    .project-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .fc-callout { margin-top: 1.25rem; border-left: 1px solid var(--g3); padding-left: 1.25rem; }
+    .fc-callout-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g5); margin-bottom: 0.35rem; }
+    .fc-callout-text { font-size: 0.83rem; color: var(--g6); line-height: 1.7; }
+
+    .agents-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 1.5rem; }
+    .agent-box { background: var(--g1); padding: 1rem 1.1rem; }
+    .agent-n { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; color: var(--g5); text-transform: uppercase; margin-bottom: 0.3rem; }
+    .agent-name { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.25rem; }
+    .agent-desc { font-size: 0.78rem; color: var(--g5); line-height: 1.6; }
+
+    /* SKILLS */
+    #skills { border-bottom: 1px solid var(--border); }
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+    .skill-group { background: var(--black); padding: 2rem; }
+    .skill-group-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--g5); margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-s); }
+    .skill-list { list-style: none; display: grid; gap: 0.6rem; }
+    .skill-list li { font-size: 0.88rem; color: var(--g7); display: flex; align-items: center; gap: 0.6rem; }
+    .skill-list li::before { content: ''; width: 4px; height: 4px; background: var(--g5); border-radius: 50%; flex-shrink: 0; }
+
+    /* CERTS */
+    #certifications { border-bottom: 1px solid var(--border); }
+    .certs-list { display: grid; gap: 1px; background: var(--border); }
+    .cert-row { background: var(--black); display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 1.5rem 0; transition: background 0.2s; }
+    .cert-row:hover { background: var(--g1); }
+    .cert-name { font-size: 0.95rem; font-weight: 400; margin-bottom: 0.25rem; }
+    .cert-meta { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g5); }
+    .cert-link { display: flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g5); border: 1px solid var(--border); padding: 0.45rem 0.85rem; border-radius: 1px; white-space: nowrap; flex-shrink: 0; transition: all 0.2s; }
+    .cert-link:hover { color: var(--white); border-color: var(--g5); }
+    .cert-link svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* LEADERSHIP */
+    #leadership { border-bottom: 1px solid var(--border); }
+    .leadership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+    .leadership-item { background: var(--black); padding: 2rem; }
+    .leadership-role { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g5); margin-bottom: 0.75rem; }
+    .leadership-title { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .leadership-desc { font-size: 0.88rem; color: var(--g5); line-height: 1.8; }
+
+    /* CONTACT */
+    #contact { padding-bottom: 4rem; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .contact-heading { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; margin-bottom: 1rem; }
+    .contact-heading em { font-style: italic; color: var(--g6); }
+    .contact-subtext { font-size: 0.9rem; color: var(--g5); line-height: 1.8; }
+    .contact-links-list { display: grid; gap: 1px; background: var(--border); }
+    .contact-row { background: var(--black); display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 0; transition: background 0.2s; }
+    .contact-row:hover { background: var(--g1); }
+    .contact-platform { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g5); }
+    .contact-handle { font-size: 0.88rem; color: var(--g7); }
+
+    footer { border-top: 1px solid var(--border); padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g5); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+    .hero-name    { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-bio     { animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+    .hero-img-wrap { animation: fadeUp 0.7s 0.15s ease both; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-img-wrap { max-width: 340px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .leadership-grid { grid-template-columns: 1fr; }
+      .agents-row { grid-template-columns: 1fr; }
+      .project-item { grid-template-columns: 1fr; }
+      .stats-inner { flex-wrap: wrap; }
+      .stat { min-width: 45%; border-bottom: 1px solid var(--border); }
     }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(93, 169, 255, 0.16), transparent 28%),
-        linear-gradient(180deg, #07101e 0%, #090d18 100%);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(125, 171, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(125, 171, 255, 0.05) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
-      opacity: 0.4;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(100% - 2rem, var(--max));
-      margin: 0 auto;
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(14px);
-      background: rgba(7, 12, 24, 0.72);
-      border-bottom: 1px solid rgba(126, 162, 255, 0.12);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-      gap: 1rem;
-    }
-
-    .brand {
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      font-size: 1rem;
-    }
-
-    .brand span {
-      color: var(--accent-2);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .hero {
-      padding: 4.5rem 0 3rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .hero-copy {
-      background: linear-gradient(180deg, rgba(14, 24, 43, 0.85), rgba(11, 18, 33, 0.75));
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 2.25rem;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      gap: 0.5rem;
-      align-items: center;
-      border: 1px solid rgba(126, 162, 255, 0.2);
-      background: rgba(93, 169, 255, 0.08);
-      color: var(--accent-2);
-      border-radius: 999px;
-      padding: 0.35rem 0.8rem;
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 5vw, 4.2rem);
-      line-height: 1.05;
-      margin-bottom: 1rem;
-    }
-
-    .hero-copy p {
-      color: var(--muted);
-      font-size: 1.03rem;
-      max-width: 60ch;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-top: 1.6rem;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.85rem 1.2rem;
-      border-radius: 14px;
-      font-weight: 600;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-      border: 1px solid var(--line);
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button.primary {
-      background: linear-gradient(135deg, var(--accent), #4b79ff);
-      color: #04101f;
-      border-color: transparent;
-    }
-
-    .button.secondary {
-      background: rgba(255,255,255,0.02);
-      color: var(--text);
-    }
-
-    .hero-card {
-      background: linear-gradient(180deg, rgba(14, 24, 43, 0.82), rgba(10, 16, 29, 0.88));
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      min-height: 520px;
-    }
-
-    .section {
-      padding: 1.25rem 0 2rem;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: end;
-      margin-bottom: 1.2rem;
-    }
-
-    .section-header h2 {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-    }
-
-    .section-header p {
-      color: var(--muted);
-      max-width: 54ch;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 1rem;
-    }
-
-    .card {
-      grid-column: span 12;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1.4rem;
-      backdrop-filter: blur(12px);
-    }
-
-    .card h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    .card p,
-    .card li {
-      color: var(--muted);
-    }
-
-    .span-4 { grid-column: span 4; }
-    .span-5 { grid-column: span 5; }
-    .span-6 { grid-column: span 6; }
-    .span-7 { grid-column: span 7; }
-    .span-8 { grid-column: span 8; }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 0.8rem;
-    }
-
-    .tag {
-      padding: 0.55rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(93, 169, 255, 0.08);
-      border: 1px solid rgba(126, 162, 255, 0.18);
-      color: #dbeaff;
-      font-size: 0.93rem;
-    }
-
-    .list {
-      list-style: none;
-      display: grid;
-      gap: 0.9rem;
-      margin-top: 0.9rem;
-    }
-
-    .list li {
-      padding-left: 1rem;
-      position: relative;
-    }
-
-    .list li::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      position: absolute;
-      left: 0;
-      top: 0.65rem;
-    }
-
-    .project-placeholder {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .project-box {
-      background: linear-gradient(180deg, rgba(17, 26, 47, 0.92), rgba(13, 19, 35, 0.9));
-      border: 1px dashed rgba(126, 162, 255, 0.28);
-      border-radius: 18px;
-      padding: 1rem;
-    }
-
-    .project-box strong {
-      display: block;
-      margin-bottom: 0.25rem;
-    }
-
-    .contact-links {
-      display: grid;
-      gap: 0.9rem;
-      margin-top: 1rem;
-    }
-
-    .contact-link {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
-      padding: 1rem 1.1rem;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.02);
-    }
-
-    .contact-link span:last-child {
-      color: var(--accent-2);
-      font-size: 0.95rem;
-    }
-
-    footer {
-      padding: 2rem 0 3rem;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    @media (max-width: 960px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card {
-        max-width: 540px;
-      }
-
-      .span-4,
-      .span-5,
-      .span-6,
-      .span-7,
-      .span-8 {
-        grid-column: span 12;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-top: 3rem;
-      }
-
-      .hero-copy,
-      .card {
-        padding: 1.1rem;
-      }
-
-      .nav-inner,
-      .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero-card img {
-        min-height: 380px;
-      }
+    @media (max-width: 600px) {
+      .wrap { padding: 0 1.25rem; }
+      section { padding: 4rem 0; }
+      #hero { padding: 5rem 0 4rem; }
+      .nav-links { display: none; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .cert-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#top" class="brand">Isaac <span>Hashimi</span></a>
+
+  <nav>
+    <div class="nav-inner">
+      <span class="brand"><strong>Isaac Hashimi</strong> &nbsp;/&nbsp; EE Portfolio</span>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
-        <a href="#leadership">Leadership</a>
+        <a href="#certifications">Certs</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">Electrical Engineering Student • Portfolio</div>
-          <h1>Building practical engineering solutions with code, systems thinking, and hands-on design.</h1>
-          <p>
-            I’m Isaac Hashimi, an Electrical Engineering student at UC Santa Cruz with experience in power electronics,
-            CAD, embedded-minded problem solving, programming, and technical teamwork. My interests include electrical systems,
-            engineering design, and building reliable solutions that connect software and hardware.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="Isaac_Hashimi_Resume.pdf" download>Download Resume</a>
-            <a class="button secondary" href="#projects">View Projects</a>
-            <a class="button secondary" href="https://github.com/IsaacH-2" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="button secondary" href="https://www.linkedin.com/in/isaac-hashimi/" target="_blank" rel="noreferrer">LinkedIn</a>
-          </div>
-        </div>
+  <main>
 
-        <div class="hero-card">
-          <img src="profile.png" alt="Professional portrait of Isaac Hashimi" />
+    <section id="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <p class="hero-eyebrow">Electrical Engineering &mdash; UC Santa Cruz</p>
+            <h1 class="hero-name">Isaac<br><em>Hashimi</em></h1>
+            <p class="hero-bio">
+              Electrical engineering student with experience in power electronics, hardware design,
+              embedded systems, and software. I build things that bridge circuits and code &mdash; from
+              RTL verification agents to FSAE electric vehicles.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="Gen_Isaac_Resume.pdf" download>Download Resume</a>
+              <a class="btn btn-ghost" href="#projects">Projects</a>
+              <a class="btn btn-ghost" href="https://github.com/IsaacH-2" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn btn-ghost" href="https://www.linkedin.com/in/isaac-hashimi/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </div>
+          <div class="hero-img-wrap">
+            <img src="profile.jpg" alt="Portrait of Isaac Hashimi" />
+            <p class="hero-img-caption">Isaac Hashimi &mdash; Mountain House, CA</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <h2>About Me</h2>
+    <div class="stats-strip">
+      <div class="wrap">
+        <div class="stats-inner">
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Certifications</div>
           </div>
-          <p>
-            I enjoy combining technical knowledge with teamwork and leadership. My background includes engineering projects,
-            tutoring, student leadership, and competitive team environments that strengthened my communication and problem-solving skills.
-          </p>
+          <div class="stat">
+            <div class="stat-num">2+</div>
+            <div class="stat-label">Years FSAE</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Languages</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">UCSC</div>
+            <div class="stat-label">B.S. Electrical Engineering</div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="card-grid">
-          <article class="card span-7">
-            <h3>Education</h3>
-            <p><strong>University of California, Santa Cruz</strong> — Electrical Engineering</p>
-            <ul class="list">
-              <li>Focused on technical growth in electrical systems, design, and engineering problem solving.</li>
-              <li>Interested in power electronics, hardware-oriented systems, and practical engineering applications.</li>
-              <li>Actively building projects that connect coding, design tools, and engineering fundamentals.</li>
+    <section id="about">
+      <div class="wrap">
+        <p class="section-label">About</p>
+        <div class="about-grid">
+          <div class="about-left">
+            <h2>Engineering at the intersection of <em>hardware and software</em></h2>
+            <p>
+              I'm an Electrical Engineering student at UC Santa Cruz with a minor in Technology and Information
+              Management. My work spans power electronics, CAD design, embedded-adjacent programming, and
+              autonomous software systems.
+            </p>
+            <p>
+              Outside the classroom I'm an active member of Formula Slug, UCSC's FSAE electric vehicle team,
+              where I work on high-voltage systems and enclosure design. I care about building things that
+              work reliably &mdash; and finding the cases where they don't.
+            </p>
+          </div>
+          <div class="about-right">
+            <div class="info-row">
+              <span class="info-label">Institution</span>
+              <span class="info-val">UC Santa Cruz</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Degree</span>
+              <span class="info-val">B.S. Electrical Engineering</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Minor</span>
+              <span class="info-val">Technology &amp; Information Management</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Location</span>
+              <span class="info-val">Mountain House, CA</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Interests</span>
+              <span class="info-val">Power electronics, hardware systems, CAD, verification</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Status</span>
+              <span class="info-val">Open to internships</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <p class="section-label">Projects</p>
+        <div class="projects-list">
+
+          <div class="project-item">
+            <div>
+              <p class="project-num">01</p>
+              <h2 class="project-name">FaultClaw</h2>
+              <p class="project-desc">
+                Autonomous multi-agent hardware verification pipeline that ingests an RTL module, generates
+                adversarial test cases, and runs them against a golden reference model &mdash; producing structured
+                coverage reports and failure diagnoses without human intervention. Built on NVIDIA Nemotron
+                running on Brev cloud compute.
+              </p>
+              <div class="agents-row">
+                <div class="agent-box">
+                  <p class="agent-n">Agent 01</p>
+                  <p class="agent-name">Spec Reader</p>
+                  <p class="agent-desc">Parses RTL interface and behavior into a structured internal representation.</p>
+                </div>
+                <div class="agent-box">
+                  <p class="agent-n">Agent 02</p>
+                  <p class="agent-name">Test Generator</p>
+                  <p class="agent-desc">Reasons about design assumptions to generate functional, edge-case, and adversarial tests.</p>
+                </div>
+                <div class="agent-box">
+                  <p class="agent-n">Agent 03</p>
+                  <p class="agent-name">Verification Judge</p>
+                  <p class="agent-desc">Executes tests, logs failures, computes coverage, and triggers follow-up suites on detected failures.</p>
+                </div>
+              </div>
+              <div class="fc-callout" style="margin-top:1.5rem;">
+                <p class="fc-callout-label">Breakdown Mode</p>
+                <p class="fc-callout-text">Full adversarial testing mode that systematically dismantles design assumptions through overflow maximization, boundary stressing, and chained input sequences engineered to expose hidden failure states.</p>
+              </div>
+              <div class="project-tags" style="margin-top:1.25rem;">
+                <span class="tag">Python</span>
+                <span class="tag">NVIDIA Nemotron</span>
+                <span class="tag">Brev Cloud</span>
+                <span class="tag">RTL Verification</span>
+                <span class="tag">Multi-Agent Systems</span>
+                <span class="tag">SystemVerilog</span>
+              </div>
+            </div>
+            <a class="project-link" href="https://github.com/re1tub/FaultClaw" target="_blank" rel="noreferrer">
+              GitHub
+              <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+          </div>
+
+          <div class="project-item">
+            <div>
+              <p class="project-num">02</p>
+              <h2 class="project-name">Formula Slug &mdash; HV Team</h2>
+              <p class="project-desc">
+                Electrical member of UCSC's FSAE electric vehicle team. Designed and modeled the high-voltage
+                charger enclosure in Onshape with 2D manufacturing drawings, contributed to internal power
+                electronics organization, and worked with high-current cabling in a safety-critical system.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Onshape CAD</span>
+                <span class="tag">Power Electronics</span>
+                <span class="tag">HV Systems</span>
+                <span class="tag">Manufacturing Drawings</span>
+                <span class="tag">FSAE</span>
+              </div>
+            </div>
+            <div></div>
+          </div>
+
+          <div class="project-item">
+            <div>
+              <p class="project-num">03</p>
+              <h2 class="project-name">RISC-V CPU</h2>
+              <p class="project-desc">
+                Digital design and verification project involving SystemVerilog implementation, ALU testbench
+                development, and simulation workflows. Built and verified core processor components with a
+                focus on correct architectural behavior and edge-case coverage.
+              </p>
+              <div class="project-tags">
+                <span class="tag">SystemVerilog</span>
+                <span class="tag">RISC-V</span>
+                <span class="tag">Digital Design</span>
+                <span class="tag">RTL</span>
+                <span class="tag">Simulation</span>
+              </div>
+            </div>
+            <div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <p class="section-label">Skills</p>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <p class="skill-group-label">Programming</p>
+            <ul class="skill-list">
+              <li>C</li>
+              <li>Python</li>
+              <li>Java</li>
+              <li>HTML / CSS / JavaScript</li>
+              <li>SystemVerilog</li>
+              <li>RISC-V Assembly</li>
             </ul>
-          </article>
-
-          <article class="card span-5">
-            <h3>Interests</h3>
-            <div class="tag-list">
-              <span class="tag">Electrical Engineering</span>
-              <span class="tag">Power Electronics</span>
-              <span class="tag">CAD Design</span>
-              <span class="tag">Programming</span>
-              <span class="tag">Hardware Systems</span>
-              <span class="tag">Problem Solving</span>
-            </div>
-          </article>
+          </div>
+          <div class="skill-group">
+            <p class="skill-group-label">Engineering Tools</p>
+            <ul class="skill-list">
+              <li>Onshape CAD</li>
+              <li>Circuit Analysis</li>
+              <li>RTL Simulation</li>
+              <li>2D Manufacturing Drawings</li>
+              <li>Design Documentation</li>
+              <li>NEC Standards</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <p class="skill-group-label">AI &amp; Compute</p>
+            <ul class="skill-list">
+              <li>Multi-Agent Systems</li>
+              <li>LLM Integration</li>
+              <li>NVIDIA Nemotron</li>
+              <li>Triton Kernel Dev (AMD)</li>
+              <li>GPU Compute</li>
+              <li>Brev Cloud Infrastructure</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <p class="skill-group-label">Professional</p>
+            <ul class="skill-list">
+              <li>Technical Communication</li>
+              <li>Team Collaboration</li>
+              <li>Leadership</li>
+              <li>Tutoring &amp; Instruction</li>
+              <li>Project Coordination</li>
+              <li>Adaptability</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="projects" class="section">
-      <div class="container">
-        <div class="section-header">
+    <section id="certifications">
+      <div class="wrap">
+        <p class="section-label">Certifications</p>
+        <div class="certs-list">
+          <div class="cert-row">
+            <div>
+              <p class="cert-name">Triton Kernel Development on AMD Instinct GPUs</p>
+              <p class="cert-meta">AMD &mdash; Issued Jan 2026</p>
+            </div>
+            <a class="cert-link" href="https://learning.amd.com/certs/11279/123BBEE2A5F24B609B0531EB85BCFA4166986.pdf" target="_blank" rel="noreferrer">
+              Credential
+              <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+          </div>
+          <div class="cert-row">
+            <div>
+              <p class="cert-name">Advanced Part and Surfacing Design</p>
+              <p class="cert-meta">Onshape by PTC &mdash; Issued Dec 2025</p>
+            </div>
+            <a class="cert-link" href="https://ti-user-certificates.s3.amazonaws.com/6e557ed6-d03d-4c48-9492-4d18d145d7a1/20545196-eab8-4eb2-ba15-3989c60f3fd4-isaac-hashimi-c8179142-3755-47c1-8e87-23e1d9a10a1e-certificate.pdf" target="_blank" rel="noreferrer">
+              Credential
+              <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+          </div>
+          <div class="cert-row">
+            <div>
+              <p class="cert-name">Java SE 8 Programmer I</p>
+              <p class="cert-meta">Oracle &mdash; Issued Feb 2025</p>
+            </div>
+            <a class="cert-link" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=E70401CACF0B67713DB83DAAAF6EEEB55048E4B071D2B7F7BA9374D22DFCAE70" target="_blank" rel="noreferrer">
+              Credential
+              <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="leadership">
+      <div class="wrap">
+        <p class="section-label">Leadership</p>
+        <div class="leadership-grid">
+          <div class="leadership-item">
+            <p class="leadership-role">Student Organization</p>
+            <h3 class="leadership-title">SkillsUSA Competition Manager</h3>
+            <p class="leadership-desc">
+              Coordinated competitive events for the chapter &mdash; managing logistics, communication, and
+              team organization across multiple competition tracks. Developed tooling to automate
+              event tracking and participant management.
+            </p>
+          </div>
+          <div class="leadership-item">
+            <p class="leadership-role">Academic Support</p>
+            <h3 class="leadership-title">High School Summer Tutor</h3>
+            <p class="leadership-desc">
+              Supported students through Mountain House High School's summer academic program,
+              helping them strengthen coursework, build confidence, and develop better study
+              habits in subjects they were struggling with.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <p class="section-label">Contact</p>
+        <div class="contact-grid">
           <div>
-            <h2>Projects</h2>
+            <h2 class="contact-heading">Open to <em>opportunities</em></h2>
+            <p class="contact-subtext">
+              Actively looking for internships in hardware engineering, embedded systems,
+              and software. Reach out via email or connect on LinkedIn.
+            </p>
           </div>
-          <p>
-            This section is set up and ready. We can add your full project cards, GitHub links, screenshots, and technical writeups next.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="project-placeholder">
-            <div class="project-box">
-              <strong>Formula Slug — High Voltage Team</strong>
-              <p>Power electronics box design, enclosure layout, internal organization, and high-current cabling work.</p>
-            </div>
-            <div class="project-box">
-              <strong>RISC-V CPU Project</strong>
-              <p>Digital design and verification work involving SystemVerilog, ALU testbench development, and simulation workflows.</p>
-            </div>
-            <div class="project-box">
-              <strong>More Projects Coming Soon</strong>
-              <p>We can add class projects, hardware builds, coding work, or engineering design pieces here.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="section">
-      <div class="container">
-        <div class="section-header">
           <div>
-            <h2>Skills</h2>
+            <div class="contact-links-list">
+              <a class="contact-row" href="mailto:isaachashimi001@gmail.com">
+                <span class="contact-platform">Email</span>
+                <span class="contact-handle">isaachashimi001@gmail.com</span>
+              </a>
+              <a class="contact-row" href="https://github.com/IsaacH-2" target="_blank" rel="noreferrer">
+                <span class="contact-platform">GitHub</span>
+                <span class="contact-handle">IsaacH-2</span>
+              </a>
+              <a class="contact-row" href="https://www.linkedin.com/in/isaac-hashimi/" target="_blank" rel="noreferrer">
+                <span class="contact-platform">LinkedIn</span>
+                <span class="contact-handle">isaac-hashimi</span>
+              </a>
+            </div>
           </div>
-          <p>
-            A mix of technical and professional strengths drawn from engineering, programming, teamwork, and communication.
-          </p>
-        </div>
-
-        <div class="card-grid">
-          <article class="card span-4">
-            <h3>Programming</h3>
-            <div class="tag-list">
-              <span class="tag">C</span>
-              <span class="tag">Python</span>
-              <span class="tag">Java</span>
-              <span class="tag">HTML/CSS/JS</span>
-              <span class="tag">SystemVerilog</span>
-              <span class="tag">RISC-V Assembly</span>
-            </div>
-          </article>
-
-          <article class="card span-4">
-            <h3>Engineering Tools</h3>
-            <div class="tag-list">
-              <span class="tag">CAD</span>
-              <span class="tag">Circuit Analysis</span>
-              <span class="tag">Simulation</span>
-              <span class="tag">Design Documentation</span>
-              <span class="tag">Technical Problem Solving</span>
-            </div>
-          </article>
-
-          <article class="card span-4">
-            <h3>Professional Skills</h3>
-            <div class="tag-list">
-              <span class="tag">Leadership</span>
-              <span class="tag">Public Speaking</span>
-              <span class="tag">Team Collaboration</span>
-              <span class="tag">Tutoring</span>
-              <span class="tag">Adaptability</span>
-              <span class="tag">Organization</span>
-            </div>
-          </article>
         </div>
       </div>
     </section>
-    <section id="certifications" class="section certifications-section">
-  <div class="section-header">
-    <h2>Certifications</h2>
-    <p>Verified credentials and technical certifications.</p>
+
+  </main>
+
+  <div class="wrap">
+    <footer>
+      <span class="footer-copy">&copy; 2026 Isaac Hashimi</span>
+      <span class="footer-copy">Electrical Engineering &mdash; UC Santa Cruz</span>
+    </footer>
   </div>
 
-  <div class="certifications-grid">
-    <article class="cert-card">
-      <div class="cert-content">
-        <h3>Triton Kernel Development on AMD Instinct GPUs</h3>
-        <p class="cert-meta">AMD • Issued Jan 2026</p>
-      </div>
-      <a
-        class="cert-button"
-        href="https://learning.amd.com/certs/11279/123BBEE2A5F24B609B0531EB85BCFA4166986.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Credential Link
-      </a>
-    </article>
-
-    <article class="cert-card">
-      <div class="cert-content">
-        <h3>Advanced Part and Surfacing Design</h3>
-        <p class="cert-meta">Onshape by PTC • Issued Dec 2025</p>
-      </div>
-      <a
-        class="cert-button"
-        href="https://ti-user-certificates.s3.amazonaws.com/6e557ed6-d03d-4c48-9492-4d18d145d7a1/20545196-eab8-4eb2-ba15-3989c60f3fd4-isaac-hashimi-c8179142-3755-47c1-8e87-23e1d9a10a1e-certificate.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Credential Link
-      </a>
-    </article>
-
-    <article class="cert-card">
-      <div class="cert-content">
-        <h3>Java SE 8 Programmer I</h3>
-        <p class="cert-meta">Oracle • Issued Feb 2025</p>
-      </div>
-      <a
-        class="cert-button"
-        href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=E70401CACF0B67713DB83DAAAF6EEEB55048E4B071D2B7F7BA9374D22DFCAE70"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Credential Link
-      </a>
-    </article>
-  </div>
-</section>
-
-<style>
-  .certifications-section {
-    padding: 80px 24px;
-    background: #0b1220;
-    color: #e5e7eb;
-  }
-
-  .section-header {
-    max-width: 800px;
-    margin: 0 auto 32px;
-    text-align: center;
-  }
-
-  .section-header h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #ffffff;
-  }
-
-  .section-header p {
-    font-size: 1rem;
-    color: #94a3b8;
-  }
-
-  .certifications-grid {
-    max-width: 950px;
-    margin: 0 auto;
-    display: grid;
-    gap: 20px;
-  }
-
-  .cert-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 24px;
-    border: 1px solid rgba(148, 163, 184, 0.18);
-    border-radius: 18px;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(17, 24, 39, 0.9));
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  }
-
-  .cert-card h3 {
-    margin: 0 0 8px;
-    font-size: 1.1rem;
-    color: #f8fafc;
-  }
-
-  .cert-meta {
-    margin: 0;
-    color: #94a3b8;
-    font-size: 0.95rem;
-  }
-
-  .cert-button {
-    display: inline-block;
-    white-space: nowrap;
-    padding: 12px 18px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    color: #0b1220;
-    background: #60a5fa;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  }
-
-  .cert-button:hover {
-    transform: translateY(-2px);
-    background: #93c5fd;
-    box-shadow: 0 8px 20px rgba(96, 165, 250, 0.28);
-  }
-
-  @media (max-width: 700px) {
-    .cert-card {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .cert-button {
-      width: 100%;
-      text-align: center;
-    }
-  }
-</style>
-
-   <section id="leadership" class="section">
-  <div class="container">
-    <div class="section-header">
-      <div>
-        <h2>Leadership</h2>
-      </div>
-      <p>
-        Leadership has been a consistent part of my growth, especially through technical organizations and community-based work.
-      </p>
-    </div>
-
-    <div class="card-grid single-card-center">
-      <article class="card leadership-card">
-        <h3>Leadership</h3>
-        <ul class="list">
-          <li>
-            <strong>SkillsUSA Competition Manager:</strong>
-            Coordinated competitive events for my chapter while strengthening planning, communication, and team organization.
-          </li>
-          <li>
-            <strong>High School Summer Tutor:</strong>
-            Supported students in summer academic programs by helping them improve coursework, stay on track, and build confidence in subjects they were struggling with.
-          </li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="section">
-  <div class="container">
-    <div class="section-header">
-      <div>
-        <h2>Contact</h2>
-      </div>
-      <p>
-        I’m open to opportunities, engineering projects, and professional connections.
-      </p>
-    </div>
-
-    <div class="contact-center">
-      <div class="card contact-card">
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:isaachashimi001@gmail.com">
-            <span>Email</span>
-            <span>isaachashimi001@gmail.com</span>
-          </a>
-          <a class="contact-link" href="https://github.com/IsaacH-2" target="_blank" rel="noreferrer">
-            <span>GitHub</span>
-            <span>IsaacH-2</span>
-          </a>
-          <a class="contact-link" href="https://www.linkedin.com/in/isaac-hashimi/" target="_blank" rel="noreferrer">
-            <span>LinkedIn</span>
-            <span>isaac-hashimi</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+</body>
+</html>
